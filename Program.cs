@@ -80,7 +80,7 @@ namespace CyberChatbotApplication
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine("                                                                WELCOME TO YOUR CYBERSECURITY AWARNESS ASSISTANT !!                              ");
@@ -128,7 +128,7 @@ namespace CyberChatbotApplication
             {
 
                 Console.ForegroundColor = ConsoleColor.Blue;//the users prompt chate will appear and it will use the users entered name 
-                Console.Write($"\n{name}:");
+                Console.Write($" \n {name}:");
                 string input = Console.ReadLine()?.Trim().ToLower();//reads the user inputs and removes any following occurances of whitespace
                 //Changed this function for it doesnt quite satisfy the functionality of sensitivity because it is very quite case sensitive
 
@@ -210,35 +210,46 @@ namespace CyberChatbotApplication
         }//end of greeting method
 
         private void logo()
+
         {
+            string asciiPath = AppDomain.CurrentDomain.BaseDirectory;
+            string newAsciiPath = asciiPath.Replace("bin\\Debug", "");
+            string fullPath = Path.Combine(newAsciiPath, "C:\\Users\\RC_Student_lab\\source\\repos\\CyberChatbotApplication\\ascii_folder\\locked.jpeg");
+
+            if (!File.Exists(fullPath))
             {
-                string asciiPath = AppDomain.CurrentDomain.BaseDirectory;
+                Console.WriteLine($"Error: Image not found at {fullPath}");
+                return;
+            }
 
-                string newAsciiPath = asciiPath.Replace("bin\\Debug", "");
+            Bitmap image = new Bitmap(fullPath);
+            image = new Bitmap(image, new Size(25, 15)); // Resize for better fit
 
-                string fullPath = Path.Combine(newAsciiPath, "C:\\Users\\RC_Student_lab\\source\\repos\\CyberChatbotApplication\\ascii_folder\\locked.jpeg");
+            ConsoleColor logoColor = ConsoleColor.Red;
 
-                Bitmap image = new Bitmap(fullPath);
-                image = new Bitmap(image, new Size(35, 25));
-
-                for (int height = 0; height < image.Height; height++)
+            for (int height = 0; height < image.Height; height++)
+            {
+                for (int repeat = 0; repeat < 6; repeat++) // Print 3 logos side-by-side
                 {
                     for (int width = 0; width < image.Width; width++)
                     {
-
                         Color pixelColor = image.GetPixel(width, height);
-                        int color = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                        char asciiDesgin = color > 200 ? ',' : color > 150 ? '*' : color > 100 ? '0' : color > 50 ? '#' : '@';
-                        Console.Write(asciiDesgin);
+                        int brightness = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
 
+                        char asciiChar = brightness > 200 ? ',' :brightness > 150 ? '*' :brightness > 100 ? '0' :brightness > 50 ? '#' : '@';
 
-
+                        Console.ForegroundColor = logoColor;
+                        Console.Write(asciiChar);
                     }
-                    Console.WriteLine();
-                }//endof for loop
-            }
-        }//end of logo
 
+                    Console.Write("  "); // Small space between logos
+                }
+
+                Console.WriteLine(); // Move to next line for all logos
+            }
+
+            Console.ForegroundColor = ConsoleColor.White; // Reset color
+        }
 
     }//end of cassBot class
 
