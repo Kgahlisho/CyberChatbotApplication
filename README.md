@@ -12,6 +12,17 @@ CAAS (Cybersecurity Awareness Assistant) is a C# console-based chatbot designed 
   - Input validations and exception handlings
   - Efficient exits
 
+
+>>> The classes utilized
+  -- 2-Dimensional Array
+  -- Char Delay effect
+  -- Find keywords
+  -- ASCII logo
+  -- Voice greeting
+  -- CASS Bot
+
+
+
 >>> Prerequistites 
 
   - [.NET Framework]
@@ -32,6 +43,7 @@ CAAS (Cybersecurity Awareness Assistant) is a C# console-based chatbot designed 
                   --> CyberChatbotApplication
                     --> CyberChatBotApplication.sln
                       --> Program
+
 
 >>> How the chatbot functions and starts 
 
