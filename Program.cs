@@ -12,13 +12,13 @@ using System.IO;
 namespace CyberChatbotApplication
 {
     internal class Program
-    { 
+    {
         static void Main(string[] args)
         {
             //created an instance of CAAS in the main method 
             CassBot Caass = new CassBot();//created object called caass
             Caass.StartCaas();//Which will begin the CASS Application.
-
+            //love
         }//end of main
     }//end of internal program
 
@@ -57,11 +57,12 @@ namespace CyberChatbotApplication
 
 
 
-        public void StartCaas() {// image
+        public void StartCaas()
+        {// image
 
             logo();
 
-            
+
             Console.ForegroundColor = ConsoleColor.Red;
 
             Console.WriteLine(@"
@@ -76,7 +77,7 @@ namespace CyberChatbotApplication
                                                      |                                                                         |
                                                      ----------------[    CYBERSECURITY AWARENESS ASSISTANT    ]----------------
                 ");
-           
+
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -88,7 +89,7 @@ namespace CyberChatbotApplication
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             Console.ForegroundColor = ConsoleColor.White;
-          
+
 
             PlayGreeting();//the voice greeting will start playing after the application has started 
 
@@ -112,9 +113,9 @@ namespace CyberChatbotApplication
 
             Console.WriteLine($" ask away, {name} ! and do try to go easy on me im still in development too :).");
 
-            Console.ForegroundColor= ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\n You can ask a question or you can enter exit to leave the application.");
-            Console.ForegroundColor=ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;
 
             Caas();
 
@@ -123,7 +124,7 @@ namespace CyberChatbotApplication
 
 
         private void Caas()
-        {   
+        {
             while (true)
             {
 
@@ -153,15 +154,15 @@ namespace CyberChatbotApplication
 
                 }//end of if
 
-                
+
                 string response = FindKeywords(input); //finds the keywaords in the users input
 
                 Console.Write(" CAAS : ");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 delayEffect(response);
-                Console.ForegroundColor = ConsoleColor.White;   
+                Console.ForegroundColor = ConsoleColor.White;
 
-         
+
             }//end of while loop
         }//end of CAAS method.
 
@@ -172,7 +173,7 @@ namespace CyberChatbotApplication
 
             for (int i = 0; i < responses.GetLength(0); i++)
             {
-                if (input.IndexOf(responses[i, 0], StringComparison.OrdinalIgnoreCase) >= 0 )
+                if (input.IndexOf(responses[i, 0], StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     return responses[i, 1];
                 }
@@ -199,9 +200,9 @@ namespace CyberChatbotApplication
             string path = @"C:\Users\RC_Student_lab\source\repos\CyberChatbotApplication\voice_folder\greeting.wav";
 
             if (System.IO.File.Exists(path))
-            { 
-                    SoundPlayer player = new SoundPlayer(path);
-                    player.PlaySync();
+            {
+                SoundPlayer player = new SoundPlayer(path);
+                player.PlaySync();
             }
             else//the voice greeting is not located at said path directory
             {
@@ -236,7 +237,7 @@ namespace CyberChatbotApplication
                         Color pixelColor = image.GetPixel(width, height);
                         int brightness = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
 
-                        char asciiChar = brightness > 200 ? ',' :brightness > 150 ? '*' :brightness > 100 ? '0' :brightness > 50 ? '#' : '@';
+                        char asciiChar = brightness > 200 ? ',' : brightness > 150 ? '*' : brightness > 100 ? '0' : brightness > 50 ? '#' : '@';
 
                         Console.ForegroundColor = logoColor;
                         Console.Write(asciiChar);
