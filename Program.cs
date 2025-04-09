@@ -27,10 +27,20 @@ namespace CyberChatbotApplication
         private string name; //made the name to be private for it to be accessed only via the cyberberSecurityChatbot 
 
         private string[,] responses = new string[,]
+
+
             {
-                { "hi", "Well hello, my name is CAAS and I'm here to assist you with cybersecurity advice. Feel free to ask anything related to online protection." },
-                { "hello", "Well hi, my name is CAAS, and I'm here to help with cybersecurity-related questions!" },
+
                 { "nice to meet you" , "well im to have met you too, let me tell you something about me and you ask me what you would like to find out more about. \n I am CAAS and im mostly here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
+                { "how are you" , "well im excited and keep in mind that im here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
+                { "tell me more" , "this is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies. "},
+                { "safety" , "If your privacy settings are not secure, anyone can see your information ,  Don't share personal information like your address, phone number or bank details."},
+                { "vpn" , " this VPNs acts like a secure tunnel, routing your internet traffic through a VPN server instead of directly through your internet service provider (ISP). "},
+                { "online protection" , "is the level of privacy protection an individual has while connected to the Internet. It covers the amount of online security available for personal and financial data, communications, and preferences."},
+                { "cyber security" , "he practices and measures implemented to protect user accounts and sensitive information from unauthorized access by using strong, unique, and regularly updated passwords, and employing additional security measures like password managers and multi-factor authentication"},
+                { "password" , "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."},
+                { "phishing", "Phishing is a cyber attack where someone pretends to be trustworthy to steal your info." },
+                { "exit", "Stay safe out there! Goodbye!" },
                 { "how are you" , "well im excited and keep in mind that im here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
                 { "what are you" , "well im a chatbot assistant, here to assist you with ready assured advice you might need , so do feel free to ask anything related to cybersecurity and protection online." },
                 { "What do you do" ,"Well my purpose is to be able to educate you and make you aware of the threats of the Cyberworld and help you when you might have occured or encountered such threats."},
@@ -38,20 +48,7 @@ namespace CyberChatbotApplication
                 { "what can i ask you", " You can ask me about password safety, phishing emails, or how to recognize suspicious links." },
                 { "What is your purpose ?" ,"Well my purpose is to be able to educate you and make you aware of the threats of the Cyberworld and help you when you might have occured or encountered such threats."},
                 { "what can a bot like you do ?" , "i can provide tips on anything cybersecurity related , be able to assist you in recognising phishing attempts to your mobile or personal compters emails or more importantly , recognising thosesuspicious links you never think they are out to harm you."  },
-                { "what is online safety" , "ooh boy i sure like a challenge , okay like when you make a password you make sure that you use a strong password so satisfy saftety measures too , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make sure hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts.Also make sure not to play around those suspicios links too !"},
-                { "tell me more about security" , "ooh boy i sure like a challenge , okay to enhance your security when you create a password you have make sure that you use a strong password ," +
-                    "\n so as to satisfy saftety measures too with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make sure hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts.Also make sure not to play around those suspicios links too !"},
-                { "what is cyber security ?" , "ooh boy i sure like a challenge , okay  when you make a password you make sure that you use a strong password so satisfy saftety measures too , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make sure hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts.Also make sure not to play around those suspicios links too !"},
-                { "why do you protect your password ?" , "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."},
-                { "tell me more about passwords" , "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."},
-                { "how can i protect myself online ?" , "You have to make sure that your password is very strong and you dont share it with anyone, make sure that you dont click on random links that you dont know because that will cost you dearly too, and dont use the same password on multiple pages online."},
-                { "tell me more ","can you be specific , because i can tell you more about cybersecurity topics."},
-                { "what is phishing ?", "right, Phishing technically phishing is a cyber attack where attackers impersonate a trustworthy entity to steal yours or big companies sensitive information. So it is advisable also to be cautious of suspicious emails and links you do recieve in your emails!" },
-                { "phishing", "right, Phishing technically phishing is a cyber attack where attackers impersonate a trustworthy entity to steal yours or big companies sensitive information. So it is advisable also to be cautious of suspicious emails and links you do recieve in your emails!" },
-                { "how can i browse safely online ?", "Always check website URLs, use HTTPS, and avoid clicking on unknown links. Keep your software and antivirus updated!" },
-                { "browse", "Always check website URLs, use HTTPS, and avoid clicking on unknown links. Keep your software and antivirus updated!" },
-                { "how are you", "I'm always ready to assist! Feel free to ask me anything about online safety." },
-                { "exit", "Stay safe out there! Goodbye!" }
+
 
             };//end of array
 
@@ -155,11 +152,11 @@ namespace CyberChatbotApplication
                 }//end of if
 
 
-                string response = FindKeywords(input); //finds the keywaords in the users input
+                string responses = FindKeywords(input); //finds the keywaords in the users input
 
                 Console.Write(" CAAS : ");
                 Console.ForegroundColor = ConsoleColor.Gray;
-                delayEffect(response);
+                delayEffect(responses);
                 Console.ForegroundColor = ConsoleColor.White;
 
 
@@ -171,9 +168,16 @@ namespace CyberChatbotApplication
         private string FindKeywords(string input)//This method will check for keywords in the users input so that it doesnt have to mtch the exact word in oredr to recivea response
         {
 
+            string cleanInput = input.ToLower().Trim();
+            cleanInput = new string (cleanInput.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
+
+
             for (int i = 0; i < responses.GetLength(0); i++)
             {
-                if (input.IndexOf(responses[i, 0], StringComparison.OrdinalIgnoreCase) >= 0)
+
+                string keyword = responses[i,0].ToLower();
+
+                if ( cleanInput.Contains(keyword))
                 {
                     return responses[i, 1];
                 }
