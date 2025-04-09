@@ -167,7 +167,7 @@ namespace CyberChatbotApplication
 
         private string FindKeywords(string input)//This method will check for keywords in the users input so that it doesnt have to mtch the exact word in oredr to recivea response
         {
-
+            //changes made here.
             string cleanInput = input.ToLower().Trim();
             cleanInput = new string (cleanInput.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
 
