@@ -144,6 +144,17 @@ namespace CyberChatbotApplication
 
             },
 
+            ["help"] = new List<string>()
+{
+            "You can ask me about:" +
+                "\n- Password safety" +
+                "\n- Phishing attacks" +
+                "\n- VPNs" +
+                "\n- Online privacy" +
+                "\n- General cybersecurity advice" +
+                "\nTry something like: 'Tell me about VPNs' or 'How do I protect my password?'"
+            
+            },
 
             ["vpn"] = new List<string>() {
 
@@ -185,9 +196,9 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
 
     { "positive" , new List<string>
         {
-        "I'm glad to hear that!",
-        "That's awesome! ",
-        "Great! Let's keep the good vibes going."
+        "I'm glad to hear that!, not ask me about cycber security and ill suprise you.",
+        "That's awesome! lets keep the same energy and get on talking about cyber security ",
+        "Great! Let's keep the good vibes going ask me anything cyber security related. "
         }},
 
 
@@ -333,7 +344,7 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
                 {
 
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine(" CAAS : I didn't quite catch that, could you maybe rephrase the question you've asked and try asking me about cybersecurity");
+                    Console.WriteLine(" CAAS : Sorry but i didn't quite catch that, could you maybe rephrase the question you've asked and try asking me about cybersecurity");
                     Console.ForegroundColor = ConsoleColor.White;
                     continue;
 
@@ -365,11 +376,12 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
                     string selectedDetection = emotionDetection[sentiment][random.Next(emotionDetection[sentiment].Count)];
                     delayEffect(selectedDetection);
                     continue;
-                }
+                }//end if
 
+                /*debugger to make sure the findemotion functionality works
                  sentiment = FindEmotion(input);
                 Console.WriteLine($"DEBUG Sentiment detected:" + sentiment);
-
+                */
 
             }//end of while loop
         }//end of CAAS method.
@@ -391,17 +403,17 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
 
                 if (cleanInput.Contains(entry.Key.ToLower()))
                 {
-                    if (entry.Value != null && entry.Value.Count > 0)
-                    {
+                  if (entry.Value != null && entry.Value.Count > 0)
+                  {
                         //this returnsa a random response
                         //var random = new Random();
                         return entry.Value[random.Next(entry.Value.Count)];
 
-                    }
+                  }
 
                 }
             }
-            return "can you please rephrase your question , and focus more about  cycber security and security online questions.";
+            return "Sorry but can you please rephrase your question , and try focusing more about cycber security and security online questions." ;
         }
 
         //
@@ -419,7 +431,7 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
 
             }
             return "none";
-        }
+        }//end of findemotion 
 
 
             
@@ -461,6 +473,8 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
             string asciiPath = AppDomain.CurrentDomain.BaseDirectory;
             string newAsciiPath = asciiPath.Replace("bin\\Debug", "");
             string fullPath = Path.Combine(newAsciiPath, "C:\\Users\\RC_Student_lab\\source\\repos\\CyberChatbotApplication\\ascii_folder\\locked.jpeg");
+
+
 
             if (!File.Exists(fullPath))
             {
