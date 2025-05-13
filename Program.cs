@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
+using System.Data;
+using System.Runtime.Remoting.Lifetime;
+using System.Diagnostics;
 
 namespace CyberChatbotApplication
 {
@@ -26,12 +29,18 @@ namespace CyberChatbotApplication
     {
         private string name; //made the name to be private for it to be accessed only via the cyberberSecurityChatbot 
 
-        private string[,] responses = new string[,]
+
+        //changed the array list into a better generic collection tat can store random responses
+        //as wel as create a better conversational flow 
+        
+        /* 
+         * private string[,] responses = new string[,]
 
 
             {
 
                 { "nice to meet you" , "well im to have met you too, let me tell you something about me and you ask me what you would like to find out more about. \n I am CAAS and im mostly here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
+                { "tell me about online safety" , "Online safety starts with you! Use strong passwords, avoid clicking random links, and always think before you share personal info. Stay sharp, stay safe!"},
                 { "how are you" , "well im excited and keep in mind that im here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
                 { "tell me more" , "this is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies. "},
                 { "safety" , "If your privacy settings are not secure, anyone can see your information ,  Don't share personal information like your address, phone number or bank details."},
@@ -50,7 +59,80 @@ namespace CyberChatbotApplication
                 { "what can a bot like you do ?" , "i can provide tips on anything cybersecurity related , be able to assist you in recognising phishing attempts to your mobile or personal compters emails or more importantly , recognising thosesuspicious links you never think they are out to harm you."  },
 
 
-            };//end of array
+            };
+        */
+
+        private Dictionary<string, List<string>> responses = new Dictionary<string, List<string>>() 
+        {
+            ["how are you"] = new List<string>(){
+            
+            "good and how are you"
+            },
+            
+            
+            ["tell me about online safety"] = new List<string>() { },
+            
+            
+            ["tell me more"] = new List<string>()
+            {
+            "this is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies. "
+
+                            
+            },
+            
+            
+            ["safety"] = new List<string>() { },
+            
+            
+            ["online safety"] = new List<string>() 
+            {
+                "Stay alert! Think before you click.",
+                "Use strong passwords and update them often.",
+                "Don't overshare personal info online!"
+            },
+            
+            ["cyber security"] = new List<string>() 
+            { 
+            
+            
+            
+            },
+            
+            ["password"] = new List<string>() 
+            {
+             "Use a mix of letters, numbers, and symbols in your password!",
+                "Avoid using the same password across sites!",
+                "Enable two-factor authentication for extra security.",
+                "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."
+            },
+            ["phishing"] = new List<string>()
+            {
+                "Phishing is a trick to get your personal info—don’t fall for it!",
+                "Never click suspicious links in emails or messages.",
+                "Verify the sender before responding to emails asking for info."
+            },
+            
+            ["what are you"] = new List<string>() { },
+            
+            
+            ["vpn"] = new List<string>() { },
+            
+            
+            ["security"] = new List<string>() 
+            { 
+            
+            
+            },
+            ["exit"] = new List<string>() 
+            {
+                "Stay safe out there! Goodbye!"
+            },
+
+
+        };
+        
+        
+        //end of array
 
 
 
@@ -164,26 +246,35 @@ namespace CyberChatbotApplication
         }//end of CAAS method.
 
 
-
+private static readonly Random random = new Random();
         private string FindKeywords(string input)//This method will check for keywords in the users input so that it doesnt have to mtch the exact word in oredr to recivea response
         {
-            //changes made here.
+            //changes made here. to make the kywords within the dictionary
+
             string cleanInput = input.ToLower().Trim();
-            cleanInput = new string (cleanInput.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
+            //removed cleaninput
+            //inserted input inthe place of cleaninput variable
+            cleanInput = new string(cleanInput.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
 
 
-            for (int i = 0; i < responses.GetLength(0); i++)
+            foreach (var entry in responses)
             {
 
-                string keyword = responses[i,0].ToLower();
-
-                if ( cleanInput.Contains(keyword))
+                if (cleanInput.Contains(entry.Key.ToLower()))
                 {
-                    return responses[i, 1];
+                    if (entry.Value != null && entry.Value.Count > 0)
+                    {
+                        //this returnsa a random response
+                        //var random = new Random();
+                        return entry.Value[random.Next(entry.Value.Count)];
+
+                    }
+
                 }
             }
-            return "didnt quite catch that , could you maybe rephrase that.";
-        }//end of method.
+            return "can you please rephrase your question , and focus more about  cycber security and security online questions.";
+        }
+
 
 
         private void delayEffect(string text)// a text delay method that will enable the conversation bettwen user and CAAS to seem more interactivr
