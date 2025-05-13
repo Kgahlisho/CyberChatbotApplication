@@ -65,67 +65,111 @@ namespace CyberChatbotApplication
         private Dictionary<string, List<string>> responses = new Dictionary<string, List<string>>() 
         {
             ["how are you"] = new List<string>(){
-            
-            "good and how are you"
+         
+            "I'm good, thanks! How about you?",
+            "Doing great! What’s on your mind?",
+            "I’m functioning optimally! How are you?"
             },
             
             
-            ["tell me about online safety"] = new List<string>() { },
+            ["tell me about online safety"] = new List<string>() {
+
+            "Online safety means protecting your privacy and personal info.",
+            "It’s all about smart habits—like not clicking sketchy links!",
+            "Think of online safety like locking your front door—but online."
+
+
+            },
             
             
             ["tell me more"] = new List<string>()
             {
-            "this is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies. "
+            "This is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies.",
+            "Cybersecurity involves layers of defense—from software to human behavior.",
+            "Want to dive deeper into firewalls, phishing, or strong passwords?"
+             },     
+            
+            
+            ["safety"] = new List<string>() {
 
-                            
+            "Safety first! Avoid risky websites and keep your devices updated.",
+            "Digital safety is just as important as physical safety!",
+            "A little caution online goes a long way."
+
+
             },
-            
-            
-            ["safety"] = new List<string>() { },
             
             
             ["online safety"] = new List<string>() 
             {
-                "Stay alert! Think before you click.",
-                "Use strong passwords and update them often.",
-                "Don't overshare personal info online!"
-            },
+            "Stay alert! Think before you click.",
+            "Use strong passwords and update them often.",
+            "Don't overshare personal info online!",
+            "Keep your apps and antivirus software up to date.",
+            "Be skeptical of offers that sound too good to be true."
+  },
             
             ["cyber security"] = new List<string>() 
-            { 
-            
-            
-            
+            {
+            "Cybersecurity keeps your data safe from hackers and bad actors.",
+            "It’s the shield that guards your digital world!",
+            "From firewalls to strong passwords—every layer matters.",
+            "It’s a mix of tech and awareness to protect info online."
+
+
             },
             
             ["password"] = new List<string>() 
             {
-             "Use a mix of letters, numbers, and symbols in your password!",
-                "Avoid using the same password across sites!",
-                "Enable two-factor authentication for extra security.",
-                "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."
+            "Use a mix of letters, numbers, and symbols in your password!",
+            "Avoid using the same password across sites!",
+            "Enable two-factor authentication for extra security.",
+            "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."
             },
             ["phishing"] = new List<string>()
             {
-                "Phishing is a trick to get your personal info—don’t fall for it!",
-                "Never click suspicious links in emails or messages.",
-                "Verify the sender before responding to emails asking for info."
+            
+            "Phishing is a trick to get your personal info—don’t fall for it!",
+            "Never click suspicious links in emails or messages.",
+            "Verify the sender before responding to emails asking for info.",
+            "Look for poor grammar and urgent language—common phishing signs!"
+ },
+            
+            ["what are you"] = new List<string>() {
+
+            "I'm your Cybersecurity Awareness Assistant!",
+            "A friendly bot here to help you stay safe online!",
+            "Think of me as your digital security sidekick."
+
+
             },
             
-            ["what are you"] = new List<string>() { },
             
-            
-            ["vpn"] = new List<string>() { },
+            ["vpn"] = new List<string>() {
+
+
+            "A VPN hides your IP and encrypts your data—super useful!",
+            "It’s like a secure tunnel for your internet connection.",
+            "Use a VPN on public Wi-Fi to stay protected."
+
+
+            },
             
             
             ["security"] = new List<string>() 
-            { 
-            
-            
+            {
+
+            "Security means protecting your info and staying alert online.",
+            "From antivirus to awareness—every step counts!",
+            "Want tips on device, account, or browsing security?"
+
             },
+
+
+
             ["exit"] = new List<string>() 
             {
-                "Stay safe out there! Goodbye!"
+            "Stay safe out there! Goodbye!"
             },
 
 
