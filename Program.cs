@@ -32,7 +32,7 @@ namespace CyberChatbotApplication
 
         //changed the array list into a better generic collection tat can store random responses
         //as wel as create a better conversational flow 
-        
+
         /* 
          * private string[,] responses = new string[,]
 
@@ -62,16 +62,16 @@ namespace CyberChatbotApplication
             };
         */
 
-        private Dictionary<string, List<string>> responses = new Dictionary<string, List<string>>() 
+        private Dictionary<string, List<string>> responses = new Dictionary<string, List<string>>()
         {
             ["how are you"] = new List<string>(){
-         
+
             "I'm good, thanks! How about you?",
             "Doing great! What’s on your mind?",
             "I’m functioning optimally! How are you?"
             },
-            
-            
+
+
             ["tell me about online safety"] = new List<string>() {
 
             "Online safety means protecting your privacy and personal info.",
@@ -80,16 +80,16 @@ namespace CyberChatbotApplication
 
 
             },
-            
-            
+
+
             ["tell me more"] = new List<string>()
             {
             "This is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies.",
             "Cybersecurity involves layers of defense—from software to human behavior.",
             "Want to dive deeper into firewalls, phishing, or strong passwords?"
-             },     
-            
-            
+             },
+
+
             ["safety"] = new List<string>() {
 
             "Safety first! Avoid risky websites and keep your devices updated.",
@@ -98,9 +98,9 @@ namespace CyberChatbotApplication
 
 
             },
-            
-            
-            ["online safety"] = new List<string>() 
+
+
+            ["online safety"] = new List<string>()
             {
             "Stay alert! Think before you click.",
             "Use strong passwords and update them often.",
@@ -108,8 +108,8 @@ namespace CyberChatbotApplication
             "Keep your apps and antivirus software up to date.",
             "Be skeptical of offers that sound too good to be true."
   },
-            
-            ["cyber security"] = new List<string>() 
+
+            ["cyber security"] = new List<string>()
             {
             "Cybersecurity keeps your data safe from hackers and bad actors.",
             "It’s the shield that guards your digital world!",
@@ -118,8 +118,8 @@ namespace CyberChatbotApplication
 
 
             },
-            
-            ["password"] = new List<string>() 
+
+            ["password"] = new List<string>()
             {
             "Use a mix of letters, numbers, and symbols in your password!",
             "Avoid using the same password across sites!",
@@ -128,13 +128,13 @@ namespace CyberChatbotApplication
             },
             ["phishing"] = new List<string>()
             {
-            
+
             "Phishing is a trick to get your personal info—don’t fall for it!",
             "Never click suspicious links in emails or messages.",
             "Verify the sender before responding to emails asking for info.",
             "Look for poor grammar and urgent language—common phishing signs!"
  },
-            
+
             ["what are you"] = new List<string>() {
 
             "I'm your Cybersecurity Awareness Assistant!",
@@ -143,8 +143,8 @@ namespace CyberChatbotApplication
 
 
             },
-            
-            
+
+
             ["vpn"] = new List<string>() {
 
 
@@ -154,9 +154,9 @@ namespace CyberChatbotApplication
 
 
             },
-            
-            
-            ["security"] = new List<string>() 
+
+
+            ["security"] = new List<string>()
             {
 
             "Security means protecting your info and staying alert online.",
@@ -167,16 +167,86 @@ namespace CyberChatbotApplication
 
 
 
-            ["exit"] = new List<string>() 
+            ["exit"] = new List<string>()
             {
             "Stay safe out there! Goodbye!"
             },
 
 
-        };
+
+
+
+        };//end of dictionary
+
+        //impliment a dictionary to store the sentiments that are going to be detected
+        //in the users resposnse
+static Dictionary<string, List<string>> emotionDetection = new Dictionary<string, List<string>>()
+{
+
+    { "positive" , new List<string>
+        {
+        "I'm glad to hear that!",
+        "That's awesome! ",
+        "Great! Let's keep the good vibes going."
+        }},
+
+
+    {"negative" , new List<string>
+        {
+         "I'm sorry to hear that. Is there anything I can do to help?",
+        "Stay strong. You're not alone!",
+        "If you're feeling down, maybe some cybersecurity tips will cheer you up."
+        }},
+
+    {"neutral" , new List<string>
+        {
+        "Got it. Let's keep chatting!",
+        "Alright. Let me know how I can assist.",
+        "Understood. I'm here to help!"
+        }},
+    };
+
+
+
+        //this will find the specific keywords in the users resposnse
+        //, which can categorise it in the correct sentient emotional it falls into
+        static Dictionary<string, string> emotionKeywords = new Dictionary<string, string>()
+    {
+        //good emotions 
+
+        { "happy", "positive" },
+        { "great", "positive" },
+        { "good", "positive" },
+        { "awesome", "positive" },
+        { "nice", "positive" },
         
+        //downbad emotions
+
+        { "sad", "negative" },
+        { "bad", "negative" },
+        { "upset", "negative" },
+        { "angry", "negative" },
+        { "depressed", "negative" },
         
-        //end of array
+        //neutral emotions
+        
+        { "okay", "neutral" },
+        { "fine", "neutral" },
+        { "alright", "neutral" },
+        { "meh", "neutral" }
+
+
+
+    };
+
+
+    
+
+
+
+
+       
+
 
 
 
@@ -251,6 +321,8 @@ namespace CyberChatbotApplication
             while (true)
             {
 
+
+
                 Console.ForegroundColor = ConsoleColor.Blue;//the users prompt chate will appear and it will use the users entered name 
                 Console.Write($" \n {name}:");
                 string input = Console.ReadLine()?.Trim().ToLower();//reads the user inputs and removes any following occurances of whitespace
@@ -285,18 +357,31 @@ namespace CyberChatbotApplication
                 delayEffect(responses);
                 Console.ForegroundColor = ConsoleColor.White;
 
+                string sentiment = FindEmotion(input);
+                if (sentiment != "none")
+                {
+
+
+                    string selectedDetection = emotionDetection[sentiment][random.Next(emotionDetection[sentiment].Count)];
+                    delayEffect(selectedDetection);
+                    continue;
+                }
+
+                 sentiment = FindEmotion(input);
+                Console.WriteLine($"DEBUG Sentiment detected:" + sentiment);
+
 
             }//end of while loop
         }//end of CAAS method.
 
 
-private static readonly Random random = new Random();
+        private static readonly Random random = new Random();
         private string FindKeywords(string input)//This method will check for keywords in the users input so that it doesnt have to mtch the exact word in oredr to recivea response
         {
             //changes made here. to make the kywords within the dictionary
 
             string cleanInput = input.ToLower().Trim();
-            //removed cleaninput
+            //removed cleaninput  
             //inserted input inthe place of cleaninput variable
             cleanInput = new string(cleanInput.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
 
@@ -318,6 +403,27 @@ private static readonly Random random = new Random();
             }
             return "can you please rephrase your question , and focus more about  cycber security and security online questions.";
         }
+
+        //
+        static string FindEmotion(string userInput)
+        {
+
+            userInput = userInput.ToLower();
+
+            foreach (var keyword in emotionKeywords)
+            {
+                if (userInput.Contains(keyword.Key))
+                {
+                    return keyword.Value;
+                }
+
+            }
+            return "none";
+        }
+
+
+            
+          
 
 
 
@@ -390,6 +496,8 @@ private static readonly Random random = new Random();
 
             Console.ForegroundColor = ConsoleColor.White; // Reset color
         }
+
+
 
     }//end of cassBot class
 
