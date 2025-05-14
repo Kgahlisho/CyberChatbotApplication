@@ -18,49 +18,21 @@ namespace CyberChatbotApplication
     {
         static void Main(string[] args)
         {
-            //created an instance of CAAS in the main method 
+
             CassBot Caass = new CassBot();//created object called caass
             Caass.StartCaas();//Which will begin the CASS Application.
-            //love
+
         }//end of main
     }//end of internal program
 
+
     class CassBot
     {
-        private string name; //made the name to be private for it to be accessed only via the cyberberSecurityChatbot 
+        private string name="";
+        //text file storagewere the chatbot can remeber the information stored 
+        private string memoryFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "caasMemory.txt");
+        private string favTopic = "";
 
-
-        //changed the array list into a better generic collection tat can store random responses
-        //as wel as create a better conversational flow 
-
-        /* 
-         * private string[,] responses = new string[,]
-
-
-            {
-
-                { "nice to meet you" , "well im to have met you too, let me tell you something about me and you ask me what you would like to find out more about. \n I am CAAS and im mostly here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
-                { "tell me about online safety" , "Online safety starts with you! Use strong passwords, avoid clicking random links, and always think before you share personal info. Stay sharp, stay safe!"},
-                { "how are you" , "well im excited and keep in mind that im here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
-                { "tell me more" , "this is the practice of protecting computer systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction, encompassing various technologies, processes, and policies. "},
-                { "safety" , "If your privacy settings are not secure, anyone can see your information ,  Don't share personal information like your address, phone number or bank details."},
-                { "vpn" , " this VPNs acts like a secure tunnel, routing your internet traffic through a VPN server instead of directly through your internet service provider (ISP). "},
-                { "online protection" , "is the level of privacy protection an individual has while connected to the Internet. It covers the amount of online security available for personal and financial data, communications, and preferences."},
-                { "cyber security" , "he practices and measures implemented to protect user accounts and sensitive information from unauthorized access by using strong, unique, and regularly updated passwords, and employing additional security measures like password managers and multi-factor authentication"},
-                { "password" , "ooh boy i sure like a challenge , okay when you make a password you make sure that you use a strong password , with a mix of letter, digits , characters and sysmbols. And make sure that it surpasses at least 8 characters to make hackers and whoever it is trying to gain access to your information will sure enough not succeed, do take not that it is not advisable to reuse the same password across different accounts."},
-                { "phishing", "Phishing is a cyber attack where someone pretends to be trustworthy to steal your info." },
-                { "exit", "Stay safe out there! Goodbye!" },
-                { "how are you" , "well im excited and keep in mind that im here to assist you with ready assured advice you might need , so do feel free to ask anything cybersecurity related and protection online related."},
-                { "what are you" , "well im a chatbot assistant, here to assist you with ready assured advice you might need , so do feel free to ask anything related to cybersecurity and protection online." },
-                { "What do you do" ,"Well my purpose is to be able to educate you and make you aware of the threats of the Cyberworld and help you when you might have occured or encountered such threats."},
-                { "what can you do", "You can ask me about password safety, phishing emails, or how to recognize suspicious links." },
-                { "what can i ask you", " You can ask me about password safety, phishing emails, or how to recognize suspicious links." },
-                { "What is your purpose ?" ,"Well my purpose is to be able to educate you and make you aware of the threats of the Cyberworld and help you when you might have occured or encountered such threats."},
-                { "what can a bot like you do ?" , "i can provide tips on anything cybersecurity related , be able to assist you in recognising phishing attempts to your mobile or personal compters emails or more importantly , recognising thosesuspicious links you never think they are out to harm you."  },
-
-
-            };
-        */
 
         private Dictionary<string, List<string>> responses = new Dictionary<string, List<string>>()
         {
@@ -191,7 +163,7 @@ namespace CyberChatbotApplication
 
         //impliment a dictionary to store the sentiments that are going to be detected
         //in the users resposnse
-static Dictionary<string, List<string>> emotionDetection = new Dictionary<string, List<string>>()
+        static Dictionary<string, List<string>> emotionDetection = new Dictionary<string, List<string>>()
 {
 
     { "positive" , new List<string>
@@ -216,8 +188,6 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
         "Understood. I'm here to help!"
         }},
     };
-
-
 
         //this will find the specific keywords in the users resposnse
         //, which can categorise it in the correct sentient emotional it falls into
@@ -297,8 +267,40 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
 
             PlayGreeting();//the voice greeting will start playing after the application has started 
 
+            LoadMemory();
 
+            if (string.IsNullOrEmpty(name)) 
+            {
 
+                Console.Write("Please enter you name: ");
+                name = Console.ReadLine()?.Trim();
+
+                while (string.IsNullOrEmpty(name)) 
+                {
+
+                    Console.WriteLine("Name cannot be empty , please enter you name to continue");
+
+                    Console.Write("Please enter you name: ");
+                    name = Console.ReadLine()?.Trim();
+
+                }
+                //then we save the new name
+                saveMemory();
+                Console.WriteLine($"\n hello, {name}! Nice to meet you.");
+
+            }
+            else 
+            {
+                Console.WriteLine($"Welcom Back!!, {name}!");
+
+                if (!string.IsNullOrEmpty(favTopic))
+                {
+                    Console.WriteLine($"{name} Its so nice to see that you are insterested in {favTopic}.Want to learn more about it or try something new ?");
+                }
+            
+            }
+            
+            /*
             Console.Write(" Please enter your name : ");
             name = Console.ReadLine()?.Trim();//This reads the users input and it removes any white space that it encounters 
 
@@ -312,7 +314,9 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
 
             }//end of validtion while loop
 
-            Console.WriteLine($"\n Hello , {name}! My name is CAAS ,im here to help you with anything related to cybersecurity awarness and potentially make your expirience online a safe haven too.  ");
+            */
+
+            Console.WriteLine($"\n My name is CAAS ,im here to help you with anything related to cybersecurity awarness and potentially make your expirience online a safe haven too.  ");
             Console.WriteLine(" You can ask my anything related to online safety & security , passwords , phishing and what it is ,and whether or not its safe to browser onine or  not.");
 
             Console.WriteLine($" ask away, {name} ! and do try to go easy on me im still in development too :).");
@@ -327,7 +331,8 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
 
 
 
-        private void Caas()
+        //changed Caas() to public to be easiliy accessed by any method
+        public void Caas()
         {
             while (true)
             {
@@ -344,11 +349,23 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
                 {
 
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine(" CAAS : Sorry but i didn't quite catch that, could you maybe rephrase the question you've asked and try asking me about cybersecurity");
+                    Console.Write(" CAAS : ");
+                    delayEffect("Sorry but i didn't quite catch that, could you maybe rephrase the question you've asked and try asking me about cybersecurity");
                     Console.ForegroundColor = ConsoleColor.White;
                     continue;
 
                 }//end of if
+
+                if (input.ToLower().StartsWith("my favorite topic is"))
+                {
+                    favTopic = input.Substring("my favorite topic is".Length).Trim();
+                    Console.Write(" CAAS: ");
+                    delayEffect($"Nice ! good to know tha you like talking about {favTopic}.");
+                    saveMemory();
+                    continue;
+
+                }
+
 
                 if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
                 {
@@ -386,6 +403,55 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
             }//end of while loop
         }//end of CAAS method.
 
+        //loadmemory 4rm file
+
+        private void LoadMemory()
+        {
+            if (File.Exists(memoryFilePath))
+            {
+                var lines = File.ReadAllLines(memoryFilePath);
+                foreach (var line in lines)
+                {
+                    var parts = line.Split('=');
+                    if (parts.Length == 2)
+                    {
+                        if (parts[0] == "name") name = parts[1];
+                        if (parts[0] == "topic") favTopic = parts[1];
+
+                    }
+
+                }
+            }
+
+        }
+
+        //save memory 2 file
+        private void saveMemory()
+        {
+            try
+            {
+
+
+                Directory.CreateDirectory(Path.GetDirectoryName(memoryFilePath));
+
+
+
+            var lines = new List<string>()
+            {
+                $"name = {name}",
+                $"topic={favTopic}"
+
+            };
+
+                File.WriteAllLines(memoryFilePath, lines);
+
+            } catch (Exception ex)
+            {
+
+                Console.WriteLine($"[Error] Unable to save to memeory file : {ex.Message}");
+            }
+        }
+
 
         private static readonly Random random = new Random();
         private string FindKeywords(string input)//This method will check for keywords in the users input so that it doesnt have to mtch the exact word in oredr to recivea response
@@ -417,14 +483,22 @@ static Dictionary<string, List<string>> emotionDetection = new Dictionary<string
         }
 
         //
-        static string FindEmotion(string userInput)
+        static string FindEmotion(string input)
         {
+            var sentimentCount = new Dictionary<string, int>
+            {
+                {"positive",0 },
+                {"negative",0 },
+                {"neutral",0 }
+            };
 
-            userInput = userInput.ToLower();
+
+
+            input = input.ToLower();
 
             foreach (var keyword in emotionKeywords)
             {
-                if (userInput.Contains(keyword.Key))
+                if (input.Contains(keyword.Key))
                 {
                     return keyword.Value;
                 }
